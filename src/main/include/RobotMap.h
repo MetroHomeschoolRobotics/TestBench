@@ -27,6 +27,7 @@
 #include "frc/WPILib.h"
 #include "ctre/Phoenix.h"
 #include "rev/CANSparkMax.h"
+#include "pixy2/FRCPixy2.h"
 
 class RobotMap {
 
@@ -36,5 +37,7 @@ public:
 	static std::shared_ptr<frc::Spark> tankDriveRearRight;
 	static std::shared_ptr<frc::Spark> tankDriveRearLeft;
 
+	static std::shared_ptr<FRCPixy2> pixySPI;
+	static std::shared_ptr<FRCPixy2> pixyI2C;
 	static void init();
 };
