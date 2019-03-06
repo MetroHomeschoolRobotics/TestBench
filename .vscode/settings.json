@@ -1,0 +1,23 @@
+{
+  "java.configuration.updateBuildConfiguration": "disabled",
+  "java.import.gradle.enabled": false,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "bin/": true,
+    ".classpath": true,
+    ".project": true
+  },
+  "wpilib.online": true,
+  "files.associations": {
+    "*.inc": "cpp",
+    "*.json": "cpp",
+    "iostream": "cpp",
+    "vector": "cpp"
+  },
+  "C_Cpp.configurationWarnings": "Disabled",
+  "C_Cpp.default.configurationProvider": "vscode-wpilib"
+}
