@@ -17,6 +17,10 @@ void Vector::print()
 
 std::wstring Vector::toString()
 {
+	 char buf[64];
+    sprintf(buf, "vector: (%d %d) (%d %d) index: %d flags %d", x0, y0, x1, y1, index, flags);
+	  //Serial.println(buf);
+//return std::to_wstring(buf);
 	return L"vector: (" + std::to_wstring(x0) + L" " + std::to_wstring(y0) + L") (" + std::to_wstring(x1) + L" " + std::to_wstring(y1) + L") index: " + std::to_wstring(index) + L" flags: " + std::to_wstring(flags);
 }
 

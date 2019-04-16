@@ -30,7 +30,8 @@ void Positioning::UpdateDashboard(){
 	}
 
 	if (RobotMap::pixyI2C != nullptr) {
-		FRCPixyBlock* spiBlock = RobotMap::pixyI2C->GetBlocks(0);
+		LineFeatures * i2cFeatures = RobotMap::pixyI2C->GetMainFeatures();
+/*		FRCPixyBlock* spiBlock = RobotMap::pixyI2C->GetBlocks(0);
 		if (spiBlock == nullptr){
 			frc::SmartDashboard::PutNumber("I2C Blocks", 0);
 			frc::SmartDashboard::PutNumber("I2C Block - X", 0);
@@ -43,7 +44,7 @@ void Positioning::UpdateDashboard(){
 			frc::SmartDashboard::PutNumber("I2C Block - Y", spiBlock->getY()/1000);
 			frc::SmartDashboard::PutNumber("I2C Block - H", spiBlock->getHeight()/1000);
 			frc::SmartDashboard::PutNumber("I2C Block - W", spiBlock->getWidth()/1000);
-		}
+		}*/
 	}
 /*
 	FRCPixyVersion* version = RobotMap::pixySPI->CheckVersion();
