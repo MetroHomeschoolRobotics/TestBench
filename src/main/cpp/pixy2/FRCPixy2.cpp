@@ -157,9 +157,78 @@ FRCPixyBlock* FRCPixy2::GetBlocks(int sigmap, int maxBlocks)
 	}
 }
 
+void FRCPixy2::SetServos(uint16_t s0, uint16_t s1) {
+	std::wcout << L"Pixy - set servos" << std::endl;
+	std::vector<std::uint8_t> sendBytes(6);
+	std::vector<std::uint8_t> receiveBytes(3);
+
+	sendBytes[0] = PIXYSTARTNOCHECK1;
+	sendBytes[1] = PIXYSTARTNOCHECK2;
+	sendBytes[2] = PIXY_TYPE_REQUEST_SET_SERVOS;
+	sendBytes[3] = PIXY02;
+	sendBytes[4] = s0;
+	sendBytes[5] = s1;
+
+	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+}
+void FRCPixy2::SetCameraBrightness(uint8_t brightness) {
+	std::wcout << L"Pixy - set brightness" << std::endl;
+	std::vector<std::uint8_t> sendBytes(5);
+	std::vector<std::uint8_t> receiveBytes(3);
+
+	sendBytes[0] = PIXYSTARTNOCHECK1;
+	sendBytes[1] = PIXYSTARTNOCHECK2;
+	sendBytes[2] = PIXY_TYPE_REQUEST_SET_BRIGHTNESS;
+	sendBytes[3] = PIXY02;
+	sendBytes[4] = brightness;
+
+	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+}
+void FRCPixy2::SetLED(uint8_t r, uint8_t g, uint8_t b) {
+	std::wcout << L"Pixy - set LED" << std::endl;
+	std::vector<std::uint8_t> sendBytes(7);
+	std::vector<std::uint8_t> receiveBytes(3);
+
+	sendBytes[0] = PIXYSTARTNOCHECK1;
+	sendBytes[1] = PIXYSTARTNOCHECK2;
+	sendBytes[2] = PIXY_TYPE_REQUEST_SET_LED;
+	sendBytes[3] = PIXY02;
+	sendBytes[4] = r;
+	sendBytes[5] = g;
+	sendBytes[6] = b;
+
+	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+}
+uint8_t FRCPixy2::GetResolution() {
+	std::wcout << L"Pixy - get resolution" << std::endl;	
+	std::vector<std::uint8_t> sendBytes(4);
+	std::vector<std::uint8_t> receiveBytes(3);
+
+	sendBytes[0] = PIXYSTARTNOCHECK1;
+	sendBytes[1] = PIXYSTARTNOCHECK2;
+	sendBytes[2] = PIXY_TYPE_REQUEST_GET_RESOLUTION;
+	sendBytes[3] = PIXY02;
+
+	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	return receiveBytes[2];
+}
+uint8_t FRCPixy2::GetFPS() {
+	std::wcout << L"Pixy - get FPS" << std::endl;	
+	std::vector<std::uint8_t> sendBytes(4);
+	std::vector<std::uint8_t> receiveBytes(3);
+
+	sendBytes[0] = PIXYSTARTNOCHECK1;
+	sendBytes[1] = PIXYSTARTNOCHECK2;
+	sendBytes[2] = PIXY_TYPE_REQUEST_GET_FPS;
+	sendBytes[3] = PIXY02;
+
+	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	return receiveBytes[2];
+}
+
 void FRCPixy2::SetLamp(uint8_t upper, uint8_t lower){
 	std::wcout << L"Pixy - set lamp" << std::endl;
-	std::vector<std::uint8_t> sendBytes(17);
+	std::vector<std::uint8_t> sendBytes(6);
 	std::vector<std::uint8_t> receiveBytes(3);
 
 	sendBytes[0] = PIXYSTARTNOCHECK1;

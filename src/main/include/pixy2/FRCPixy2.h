@@ -32,8 +32,23 @@ public:
 	static const std::uint8_t PIXY_CCC_RESPONSE_BLOCKS = static_cast<std::uint8_t>(0x21);
 	static const std::uint8_t PIXY_CCC_REQUEST_BLOCKS = static_cast<std::uint8_t>(0x20);
 
-	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LAMP = static_cast<std::uint8_t>(0x16);
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LAMP = static_cast<std::uint8_t>(0x22);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_LAMP = static_cast<std::uint8_t>(0x01);
+
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_BRIGHTNESS = static_cast<std::uint8_t>(0x16);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_BRIGHTNESS = static_cast<std::uint8_t>(0x01);
+	
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_SERVOS = static_cast<std::uint8_t>(0x18);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_SERVOS = static_cast<std::uint8_t>(0x01);
+	
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LED = static_cast<std::uint8_t>(0x20);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_LED = static_cast<std::uint8_t>(0x01);
+
+	static const std::uint8_t PIXY_TYPE_REQUEST_GET_FPS = static_cast<std::uint8_t>(0x24);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_FPS = static_cast<std::uint8_t>(0x01);
+
+	static const std::uint8_t PIXY_TYPE_REQUEST_GET_RESOLUTION = static_cast<std::uint8_t>(0x12);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_RESOLUTION = static_cast<std::uint8_t>(0x13);
 
 	static const std::uint8_t LINE_REQUEST_GET_FEATURES = static_cast<std::uint8_t>(0x30);
 	static const std::uint8_t LINE_RESPONSE_GET_FEATURES = static_cast<std::uint8_t>(0x31);
@@ -87,13 +102,12 @@ public:
 	virtual FRCPixyBlock* GetBlocks(int sigmap);
 
 	virtual FRCPixyBlock* GetBlocks(int sigmap, int maxBlocks);
-	int8_t ChangeProg(const char *prog);
-	int8_t SetServos(uint16_t s0, uint16_t s1);
-	int8_t SetCameraBrightness(uint8_t brightness);
-	int8_t SetLED(uint8_t r, uint8_t g, uint8_t b);
+	void SetServos(uint16_t s0, uint16_t s1);
+	void SetCameraBrightness(uint8_t brightness);
+	void SetLED(uint8_t r, uint8_t g, uint8_t b);
 	void SetLamp(uint8_t upper, uint8_t lower);
-	int8_t GetResolution();
-	int8_t GetFPS();
+	uint8_t GetResolution();
+	uint8_t GetFPS();
 
 	LineFeatures* GetFeatures(char type, char features, bool wait);
 

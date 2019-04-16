@@ -28,6 +28,7 @@
 #include "ctre/Phoenix.h"
 #include "rev/CANSparkMax.h"
 #include "pixy2/FRCPixy2.h"
+#include "subsystems/VisionTracking.h"
 
 class RobotMap {
 
@@ -39,5 +40,6 @@ public:
 
 	static std::shared_ptr<FRCPixy2> pixySPI;
 	static std::shared_ptr<FRCPixy2> pixyI2C;
+	static std::shared_ptr<VisionTracking> visionTracking;
 	static void init();
 };

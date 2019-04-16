@@ -21,8 +21,8 @@ void RobotMap::init() {
     frc::SpeedController *fRight = tankDriveFrontRight.get();
     frc::SpeedController *rRight = tankDriveRearRight.get();
 
-    pixySPI.reset(new FRCPixy2(frc::SPI::kOnboardCS0));
-    pixyI2C.reset(new FRCPixy2(frc::I2C::kOnboard , 0));
-
+    //pixySPI.reset(new FRCPixy2(frc::SPI::kOnboardCS0));
+    //pixyI2C.reset(new FRCPixy2(frc::I2C::kOnboard , 0));
+    visionTracking.reset(new VisionTracking());
 }
 
