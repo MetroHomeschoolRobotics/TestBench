@@ -6,6 +6,7 @@ std::shared_ptr<frc::Spark> RobotMap::tankDriveRearRight;
 std::shared_ptr<frc::Spark> RobotMap::tankDriveRearLeft;
 std::shared_ptr<FRCPixy2> RobotMap::pixySPI;
 std::shared_ptr<FRCPixy2> RobotMap::pixyI2C;
+std::shared_ptr<VisionTracking> RobotMap::visionTracking;
 
 void RobotMap::init() {
     tankDriveFrontLeft.reset(new frc::Spark(1));
@@ -16,13 +17,6 @@ void RobotMap::init() {
 
     tankDriveRearLeft.reset(new frc::Spark(2));
 
-    frc::SpeedController *fLeft = tankDriveFrontLeft.get();
-    frc::SpeedController *rLeft = tankDriveRearLeft.get();
-    frc::SpeedController *fRight = tankDriveFrontRight.get();
-    frc::SpeedController *rRight = tankDriveRearRight.get();
-
-    //pixySPI.reset(new FRCPixy2(frc::SPI::kOnboardCS0));
-    //pixyI2C.reset(new FRCPixy2(frc::I2C::kOnboard , 0));
     visionTracking.reset(new VisionTracking());
 }
 

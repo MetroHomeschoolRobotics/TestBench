@@ -20,7 +20,9 @@ void FollowObject::Initialize() {}
 void FollowObject::Execute() {
   FRCPixyBlock* block = _visionTracking->GetBlocks(_port, 1);
   if (block != nullptr){
-
+    frc::SmartDashboard::PutString("FollowTheObject", "Found");
+  } else {
+    frc::SmartDashboard::PutString("FollowTheObject", "Not Found");
   }
 }
 

@@ -1,6 +1,6 @@
 #include "pixy2/LineFeatures.h"
 
-LineFeatures::LineFeatures(Vector *vectors, Intersection *intersections, Barcode *barcodes)
+LineFeatures::LineFeatures(Vector* vectors, Intersection* intersections, Barcode* barcodes)
 {
 	_vectors = vectors;
 	_intersections = intersections;

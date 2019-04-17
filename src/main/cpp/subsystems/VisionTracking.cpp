@@ -7,7 +7,9 @@
 
 #include "subsystems/VisionTracking.h"
 
-VisionTracking::VisionTracking() : Subsystem("ExampleSubsystem") {}
+VisionTracking::VisionTracking() : Subsystem("VisionTracking") {
+  
+}
 
 void VisionTracking::InitDefaultCommand() {
   // Set the default command for a subsystem here.

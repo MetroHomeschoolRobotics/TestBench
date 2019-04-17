@@ -20,7 +20,9 @@ void FollowLine::Initialize() {}
 void FollowLine::Execute() {
   LineFeatures* features = _visionTracking->GetMainFeatures(_port);
   if (features != nullptr){
-
+    frc::SmartDashboard::PutString("FollowTheLine", "Found");
+  } else {
+    frc::SmartDashboard::PutString("FollowTheLine", "Not Found");
   }
 }
 

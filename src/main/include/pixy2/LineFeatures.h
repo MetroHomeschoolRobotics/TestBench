@@ -79,7 +79,7 @@ class LineFeatures
 		Barcode* _barcodes;
 
 	public:
-		LineFeatures(Vector *vectors, Intersection *intersections, Barcode *barcodes);
+		LineFeatures(Vector* vectors, Intersection* intersections, Barcode* barcodes);
 
 		virtual Barcode* Barcodes();
 
