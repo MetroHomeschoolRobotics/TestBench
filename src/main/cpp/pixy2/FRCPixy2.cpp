@@ -69,6 +69,8 @@ std::vector<std::uint8_t> FRCPixy2::SendCommand(FRCPixy2::PixyCommands pCommand)
 			sendBytes[5] = 0x01;
 	}
 
+	SetMessage(GetString(sendBytes));
+
 	if (pixySPI != nullptr) {
 		std::wcout << L"Pixy - SPI - ";
 		pixySPI->Transaction(sendBytes.data(), receiveBytes.data(), sendBytes.size());
@@ -80,6 +82,7 @@ std::vector<std::uint8_t> FRCPixy2::SendCommand(FRCPixy2::PixyCommands pCommand)
 	{
 		std::wcout << receiveBytes[i] << ",";
 	}
+	SetResponse(GetString(receiveBytes));
 
 	std::wcout << std::endl;
 	return receiveBytes;
@@ -169,7 +172,9 @@ void FRCPixy2::SetServos(uint16_t s0, uint16_t s1) {
 	sendBytes[4] = s0;
 	sendBytes[5] = s1;
 
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 void FRCPixy2::SetCameraBrightness(uint8_t brightness) {
 	std::wcout << L"Pixy - set brightness" << std::endl;
@@ -182,7 +187,9 @@ void FRCPixy2::SetCameraBrightness(uint8_t brightness) {
 	sendBytes[3] = PIXY02;
 	sendBytes[4] = brightness;
 
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 void FRCPixy2::SetLED(uint8_t r, uint8_t g, uint8_t b) {
 	std::wcout << L"Pixy - set LED" << std::endl;
@@ -197,7 +204,9 @@ void FRCPixy2::SetLED(uint8_t r, uint8_t g, uint8_t b) {
 	sendBytes[5] = g;
 	sendBytes[6] = b;
 
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 uint8_t FRCPixy2::GetResolution() {
 	std::wcout << L"Pixy - get resolution" << std::endl;	
@@ -209,7 +218,9 @@ uint8_t FRCPixy2::GetResolution() {
 	sendBytes[2] = PIXY_TYPE_REQUEST_GET_RESOLUTION;
 	sendBytes[3] = PIXY02;
 
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 	return receiveBytes[2];
 }
 uint8_t FRCPixy2::GetFPS() {
@@ -222,7 +233,9 @@ uint8_t FRCPixy2::GetFPS() {
 	sendBytes[2] = PIXY_TYPE_REQUEST_GET_FPS;
 	sendBytes[3] = PIXY02;
 
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 	return receiveBytes[2];
 }
 
@@ -238,7 +251,9 @@ void FRCPixy2::SetLamp(uint8_t upper, uint8_t lower){
 	sendBytes[4] = upper;
 	sendBytes[5] = lower;
 
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 
 LineFeatures* FRCPixy2::GetAllFeatures()
@@ -370,7 +385,9 @@ void FRCPixy2::SetLineMode(int mode)
 	sendBytes[4] = static_cast<char>((mode >> 8) & 0xff);
 	sendBytes[5] = static_cast<char>((mode >> 16) & 0xff);
 	sendBytes[6] = static_cast<char>((mode >> 24) & 0xff);
-	receiveBytes = FRCPixy2::SendBytes(sendBytes);
+	SetMessage(GetString(sendBytes));
+	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 
 void FRCPixy2::SetNextTurn(short angle)
@@ -385,7 +402,9 @@ void FRCPixy2::SetNextTurn(short angle)
 	sendBytes[2] = LINE_REQUEST_SET_NEXT_TURN_ANGLE;
 	sendBytes[3] = static_cast<char>(angle & 0xff);
 	sendBytes[4] = static_cast<char>((angle >> 8) & 0xff);
+	SetMessage(GetString(sendBytes));
 	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 
 void FRCPixy2::SetDefaultTurn(short angle)
@@ -400,7 +419,9 @@ void FRCPixy2::SetDefaultTurn(short angle)
 	sendBytes[2] = LINE_REQUEST_SET_DEFAULT_TURN_ANGLE;
 	sendBytes[3] = static_cast<char>(angle & 0xff);
 	sendBytes[4] = static_cast<char>((angle >> 8) & 0xff);
+	SetMessage(GetString(sendBytes));
 	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 
 void FRCPixy2::SetVector(int index)
@@ -414,7 +435,9 @@ void FRCPixy2::SetVector(int index)
 	sendBytes[1] = PIXYSTARTNOCHECK2;
 	sendBytes[2] = LINE_REQUEST_SET_VECTOR; 
 	sendBytes[3] = static_cast<char>(index);
+	SetMessage(GetString(sendBytes));
 	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
 }
 
 void FRCPixy2::ReverseVector()
@@ -427,5 +450,35 @@ void FRCPixy2::ReverseVector()
 	sendBytes[0] = PIXYSTARTNOCHECK1;
 	sendBytes[1] = PIXYSTARTNOCHECK2;
 	sendBytes[2] = LINE_REQUEST_REVERSE_VECTOR;
+	SetMessage(GetString(sendBytes));
 	receiveBytes = SendBytes(sendBytes);
+	SetResponse(GetString(receiveBytes));
+}
+
+wpi::StringRef FRCPixy2::GetString(std::vector<std::uint8_t> arr) {
+	std::stringstream list;
+
+	for (int i=0; i<arr.size(); ++i)
+	{
+		list << (int)arr[i];
+	}
+	return list.str();
+}
+
+void FRCPixy2::SetMessage(wpi::StringRef message){
+	if (pixySPI != nullptr) {
+		frc::SmartDashboard::PutString("SPI Message", message);
+	}
+	if (pixyI2C != nullptr) {
+		frc::SmartDashboard::PutString("I2C Message", message);
+	}
+}
+
+void FRCPixy2::SetResponse(wpi::StringRef response){
+    if (pixySPI != nullptr) {
+		frc::SmartDashboard::PutString("SPI Response", response);
+	}
+	if (pixyI2C != nullptr) {
+		frc::SmartDashboard::PutString("I2C Response", response);
+	}
 }

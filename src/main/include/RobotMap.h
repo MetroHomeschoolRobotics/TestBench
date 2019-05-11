@@ -25,6 +25,7 @@
 // constexpr int kRangeFinderModule = 1;
 
 #include "frc/WPILib.h"
+#include "frc/SmartDashboard/SendableChooser.h"
 #include "ctre/Phoenix.h"
 #include "rev/CANSparkMax.h"
 #include "pixy2/FRCPixy2.h"
@@ -37,6 +38,9 @@ public:
 	static std::shared_ptr<frc::Spark> tankDriveFrontRight;
 	static std::shared_ptr<frc::Spark> tankDriveRearRight;
 	static std::shared_ptr<frc::Spark> tankDriveRearLeft;
+
+	static frc::SendableChooser<frc::Command*> i2cChooser;
+	static frc::SendableChooser<frc::Command*> spiChooser;
 
 	static std::shared_ptr<FRCPixy2> pixySPI;
 	static std::shared_ptr<FRCPixy2> pixyI2C;

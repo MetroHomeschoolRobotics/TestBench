@@ -15,7 +15,6 @@
  std::unique_ptr<OI> Robot::m_oi;
 
 std::shared_ptr<DriveSystem> Robot::m_mainDrive;
-std::shared_ptr<Positioning> Robot::m_positioningSystem;
 std::shared_ptr<PneumaticCharging> Robot::m_pneumaticCompressor;
 
 void Robot::RobotInit() {
@@ -32,9 +31,8 @@ void Robot::RobotInit() {
 
     //Instantiate OI
   //m_pneumaticCompressor.reset(new PneumaticCharging(RobotMap::pneumoCharger.get()));
-  m_positioningSystem.reset(new Positioning());
 
-	m_oi.reset(new OI(m_mainDrive.get(), m_positioningSystem.get()));
+	m_oi.reset(new OI(m_mainDrive.get()));
 	m_oi.get()->SetupDashboard();
   }
 
@@ -91,7 +89,6 @@ void Robot::AutonomousInit() {
 
 void Robot::AutonomousPeriodic() { 
   frc::Scheduler::GetInstance()->Run(); 
-  m_positioningSystem->UpdateDashboard(); 
   }
 
 void Robot::TeleopInit() {
@@ -109,9 +106,7 @@ void Robot::TeleopInit() {
 }
 
 void Robot::TeleopPeriodic() { 
-  frc::Scheduler::GetInstance()->Run();
-  m_positioningSystem->UpdateDashboard(); 
-  
+  frc::Scheduler::GetInstance()->Run();  
 }
 
 void Robot::TestPeriodic() {}
@@ -123,9 +118,6 @@ DriveSystem* Robot::MainDrive() {
 
 PneumaticCharging* Robot::PneumaticCompressor(){
     return m_pneumaticCompressor.get();
-}
-Positioning* Robot::PositioningSystem(){
-    return m_positioningSystem.get();
 }
 
 

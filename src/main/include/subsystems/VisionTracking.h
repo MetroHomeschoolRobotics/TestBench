@@ -41,9 +41,9 @@ class VisionTracking : public frc::Subsystem {
 	LineFeatures* GetFeatures(PixyPort port, char type, char features, bool wait);
 	LineFeatures* GetAllFeatures(PixyPort port);
 	LineFeatures* GetMainFeatures(PixyPort port);
-	void SetLineMode(PixyPort port, int mode);
+	void SetLineMode(PixyPort port, u_int8_t mode);
 	void SetNextTurn(PixyPort port, short angle);
 	void SetDefaultTurn(PixyPort port, short angle);
-	void SetVector(PixyPort port, int index);
+	void SetVector(PixyPort port, u_int8_t index);
 	void ReverseVector(PixyPort port);
 };

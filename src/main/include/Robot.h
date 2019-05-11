@@ -14,14 +14,12 @@
 #include "OI.h"
 #include "subsystems/DriveSystem.h"
 #include "subsystems/PneumaticCharging.h"
-#include "subsystems/Positioning.h"
 
 class Robot : public frc::TimedRobot {
  public:
   //static ExampleSubsystem m_subsystem;
   static std::unique_ptr<OI> m_oi;
   static DriveSystem* MainDrive();
-	static Positioning* PositioningSystem();
 	static PneumaticCharging* PneumaticCompressor();
 
   void RobotInit() override;
@@ -44,6 +42,5 @@ class Robot : public frc::TimedRobot {
 
 	// subsystems
   static std::shared_ptr<DriveSystem> m_mainDrive;
-	static std::shared_ptr<Positioning> m_positioningSystem;
 	static std::shared_ptr<PneumaticCharging> m_pneumaticCompressor;
 };

@@ -4,8 +4,7 @@ std::shared_ptr<frc::Spark> RobotMap::tankDriveFrontLeft;
 std::shared_ptr<frc::Spark> RobotMap::tankDriveFrontRight;
 std::shared_ptr<frc::Spark> RobotMap::tankDriveRearRight;
 std::shared_ptr<frc::Spark> RobotMap::tankDriveRearLeft;
-std::shared_ptr<FRCPixy2> RobotMap::pixySPI;
-std::shared_ptr<FRCPixy2> RobotMap::pixyI2C;
+
 std::shared_ptr<VisionTracking> RobotMap::visionTracking;
 
 void RobotMap::init() {

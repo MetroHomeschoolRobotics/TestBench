@@ -8,7 +8,6 @@
 #pragma once
 
 #include "frc/WPILib.h"
-#include "subsystems/Positioning.h"
 #include "subsystems/DriveSystem.h"
 
 class OI {
@@ -17,20 +16,23 @@ private:
 
 	//Create Private Objects
 	std::shared_ptr<frc::Command> _driveCommand;
-	std::shared_ptr<frc::Joystick> driveJoystick;
-	std::shared_ptr<frc::Joystick> manipulatorJoystick;
-	frc::SendableChooser<frc::Command*> *autoChooser;
+	std::shared_ptr<frc::Joystick> _driveJoystick;
+	std::shared_ptr<frc::Joystick> _manipulatorJoystick;
+	frc::SendableChooser<frc::Command*> *_autoChooser;
+	frc::SendableChooser<frc::Command*> *_i2cChooser;
+	frc::SendableChooser<frc::Command*> *_spiChooser;
 
 	DriveSystem *_drive;
-	Positioning *_positioning; 
 
 public:
 
-	OI(DriveSystem *drive, Positioning *positioning);
+	OI(DriveSystem *drive);
 
 	void SetupDashboard();
 
 	//Create Private Inputs
 	frc::Command* DriveCommand();
 	frc::SendableChooser<frc::Command*> *getAutoChooser();
+	frc::SendableChooser<frc::Command*> *getI2CChooser();
+	frc::SendableChooser<frc::Command*> *getSPIChooser();
 };

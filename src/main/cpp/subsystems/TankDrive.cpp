@@ -7,7 +7,6 @@ TankDrive::TankDrive() : DriveSystem("TankDrive") {
     frontRight = RobotMap::tankDriveFrontRight;
     rearRight = RobotMap::tankDriveRearRight;
     rearLeft = RobotMap::tankDriveRearLeft;
-    //positioning = Robot::positioning;
 }
 
 void TankDrive::InitDefaultCommand() {

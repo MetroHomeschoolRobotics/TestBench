@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 #include <frc/WPILib.h>
 #include "pixy2/FRCPixyVersion.h"
 #include "pixy2/FRCPixyBlock.h"
@@ -172,5 +173,7 @@ public:
 private:
 	std::vector<std::uint8_t> SendCommand(FRCPixy2::PixyCommands pCommand);
 	std::vector<std::uint8_t> SendBytes(std::vector<std::uint8_t> sendBytes);
-
+	wpi::StringRef GetString(std::vector<std::uint8_t> arr);
+	void SetMessage(wpi::StringRef message);
+	void SetResponse(wpi::StringRef response);
 };

@@ -66,7 +66,7 @@ void VisionTracking::InitDefaultCommand() {
     return Resolve(port)->GetMainFeatures();
   }
  
-	void VisionTracking::SetLineMode(PixyPort port, int mode) {
+	void VisionTracking::SetLineMode(PixyPort port, u_int8_t mode) {
     Resolve(port)->SetLineMode(mode);
   }
  
@@ -78,7 +78,7 @@ void VisionTracking::InitDefaultCommand() {
     Resolve(port)->SetDefaultTurn(angle);
   }
  
-	void VisionTracking::SetVector(PixyPort port, int index) {
+	void VisionTracking::SetVector(PixyPort port, u_int8_t index) {
     Resolve(port)->SetVector(index);
   }
  
