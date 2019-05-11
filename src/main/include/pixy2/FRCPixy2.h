@@ -48,8 +48,8 @@ public:
 	static const std::uint8_t PIXY_TYPE_REQUEST_GET_FPS = static_cast<std::uint8_t>(0x24);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_FPS = static_cast<std::uint8_t>(0x01);
 
-	static const std::uint8_t PIXY_TYPE_REQUEST_GET_RESOLUTION = static_cast<std::uint8_t>(0x12);
-	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_RESOLUTION = static_cast<std::uint8_t>(0x13);
+	static const std::uint8_t PIXY_TYPE_REQUEST_GET_RESOLUTION = static_cast<std::uint8_t>(12);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_RESOLUTION = static_cast<std::uint8_t>(13);
 
 	static const std::uint8_t LINE_REQUEST_GET_FEATURES = static_cast<std::uint8_t>(0x30);
 	static const std::uint8_t LINE_RESPONSE_GET_FEATURES = static_cast<std::uint8_t>(0x31);
@@ -74,16 +74,6 @@ public:
 
 	static const std::uint8_t LINE_FLAG_INVALID = static_cast<std::uint8_t>(0x02);
 	static const std::uint8_t LINE_FLAG_INTERSECTION_PRESENT = static_cast<std::uint8_t>(0x04);
-
-
-public:
-	enum class PixyCommands
-	{
-		VERSION,
-		GETBLOCKS
-	};
-
-	//Assume Port 0 if none supplied
 public:
 	virtual ~FRCPixy2()
 	{
@@ -99,9 +89,7 @@ public:
 
 public:
 	virtual FRCPixyVersion* CheckVersion();
-
 	virtual FRCPixyBlock* GetBlocks(int sigmap);
-
 	virtual FRCPixyBlock* GetBlocks(int sigmap, int maxBlocks);
 	void SetServos(uint16_t s0, uint16_t s1);
 	void SetCameraBrightness(uint8_t brightness);
@@ -171,8 +159,8 @@ public:
 
 
 private:
-	std::vector<std::uint8_t> SendCommand(FRCPixy2::PixyCommands pCommand);
 	std::vector<std::uint8_t> SendBytes(std::vector<std::uint8_t> sendBytes);
+	std::vector<std::uint8_t> SendBytes(std::vector<std::uint8_t> sendBytes, uint8_t receiveSize);
 	wpi::StringRef GetString(std::vector<std::uint8_t> arr);
 	void SetMessage(wpi::StringRef message);
 	void SetResponse(wpi::StringRef response);

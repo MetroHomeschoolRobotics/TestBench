@@ -31,13 +31,7 @@
 OI::OI(DriveSystem *drive) {
 
 	//Instantiate the Joystick
-    _driveJoystick.reset(new frc::Joystick(0));
-    _manipulatorJoystick.reset(new frc::Joystick(1));
-
-    _driveCommand.reset(new Drive(_driveJoystick.get(), _manipulatorJoystick.get()));
     _drive = drive;
-
-    _autoChooser = new frc::SendableChooser<frc::Command*>();
 
     _i2cChooser = new frc::SendableChooser<frc::Command*>();
     _i2cChooser->SetDefaultOption("Get Version", new SendCheckVersion(PixyPort::I2C));
@@ -103,18 +97,10 @@ void OI::SetupDashboard() {
     frc::SmartDashboard::PutString("SPI Response", "");
 }
 
-frc::SendableChooser<frc::Command*> *OI::getAutoChooser() {
-	return _autoChooser;
-}
-
 frc::SendableChooser<frc::Command*> *OI::getI2CChooser() {
 	return _i2cChooser;
 }
 
 frc::SendableChooser<frc::Command*> *OI::getSPIChooser() {
 	return _spiChooser;
-}
-
-frc::Command* OI::DriveCommand() {
-	return _driveCommand.get();
 }
