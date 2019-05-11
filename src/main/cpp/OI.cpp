@@ -35,6 +35,7 @@ OI::OI(DriveSystem *drive) {
 
     _i2cChooser = new frc::SendableChooser<frc::Command*>();
     _i2cChooser->SetDefaultOption("Get Version", new SendCheckVersion(PixyPort::I2C));
+    _i2cChooser->AddOption("Set Lamps Off", new SendSetLamp(PixyPort::I2C, 0, 0));
     _i2cChooser->AddOption("Set Upper Lamp", new SendSetLamp(PixyPort::I2C, 1, 0));
     _i2cChooser->AddOption("Set Lower Lamp", new SendSetLamp(PixyPort::I2C, 0, 1));
     _i2cChooser->AddOption("Set Upper & Lower Lamp", new SendSetLamp(PixyPort::I2C, 1, 1));
@@ -60,6 +61,7 @@ OI::OI(DriveSystem *drive) {
 
     _spiChooser = new frc::SendableChooser<frc::Command*>();
     _spiChooser->SetDefaultOption("Get Version", new SendCheckVersion(PixyPort::SPI));
+    _spiChooser->AddOption("Set Lamps Off", new SendSetLamp(PixyPort::SPI, 0, 0));
     _spiChooser->AddOption("Set Upper Lamp", new SendSetLamp(PixyPort::SPI, 1, 0));
     _spiChooser->AddOption("Set Lower Lamp", new SendSetLamp(PixyPort::SPI, 0, 1));
     _spiChooser->AddOption("Set Upper & Lower Lamp", new SendSetLamp(PixyPort::SPI, 1, 1));

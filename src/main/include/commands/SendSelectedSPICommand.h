@@ -13,7 +13,6 @@
 class SendSelectedSPICommand : public frc::Command {
 private:
  std::unique_ptr<OI> _oi;
- std::unique_ptr<frc::Command> _selectedCommand;
 public:
   SendSelectedSPICommand(OI *oi);
   void Initialize() override;

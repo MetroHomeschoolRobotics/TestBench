@@ -262,76 +262,77 @@ LineFeatures* FRCPixy2::GetFeatures(char type, char features, bool wait)
 
 		// send request
 		std::vector<std::uint8_t> receiveBytes = SendBytes(sendBytes, 24);
-		if (receiveBytes.size() == 0)
+	
+		if (receiveBytes[2] == LINE_RESPONSE_GET_FEATURES)
 		{
-			if (receiveBytes[2] == LINE_RESPONSE_GET_FEATURES)
+			// parse line response
+			for (offset = 0, res = 0; receiveBytes.size() > offset; offset += fsize + 2)
 			{
-				// parse line response
-				for (offset = 0, res = 0; receiveBytes.size() > offset; offset += fsize + 2)
+				ftype = receiveBytes[offset];
+				fsize = receiveBytes[offset + 1];
+				// TODO read bytes correctly
+				//fdata = std::copy(receiveBytes, offset + 2,receiveBytes.size());
+				fdata = &receiveBytes[offset+2];
+				//for(int i=0; i<10; i=i+2){
+				//	fdata[i] = receiveBytes[i];
+				//}
+				if (ftype == LINE_VECTOR)
 				{
-					ftype = receiveBytes[offset];
-					fsize = receiveBytes[offset + 1];
-					// TODO read bytes correctly
-					//fdata = std::copy(receiveBytes, offset + 2,receiveBytes.size());
-					fdata = &receiveBytes[offset+2];
-    				//for(int i=0; i<10; i=i+2){
-       	 			//	fdata[i] = receiveBytes[i];
-					//}
-					if (ftype == LINE_VECTOR)
+					vectors = (Vector *)fdata;
+					//vectors = std::vector<Vector*>(static_cast<int>(std::floor(fdata.size() / 6)));
+					numVectors = fsize/sizeof(Vector);
+					/*
+					for (int i = 0; (i + 1) * 6 <= fdata.size(); i++)
 					{
-						vectors = (Vector *)fdata;
-						//vectors = std::vector<Vector*>(static_cast<int>(std::floor(fdata.size() / 6)));
-						numVectors = fsize/sizeof(Vector);
-						/*
-						for (int i = 0; (i + 1) * 6 <= fdata.size(); i++)
-						{
-							vectors[i] = new Vector(fdata[(6 * i)] & 0xFF, fdata[(6 * i) + 1] & 0xFF, fdata[(6 * i) + 2] & 0xFF, fdata[(6 * i) + 3] & 0xFF, fdata[(6 * i) + 4] & 0xFF, fdata[(6 * i) + 5] & 0xFF);
-						}
-						*/
-						res |= LINE_VECTOR;
+						vectors[i] = new Vector(fdata[(6 * i)] & 0xFF, fdata[(6 * i) + 1] & 0xFF, fdata[(6 * i) + 2] & 0xFF, fdata[(6 * i) + 3] & 0xFF, fdata[(6 * i) + 4] & 0xFF, fdata[(6 * i) + 5] & 0xFF);
 					}
-					else if (ftype == LINE_INTERSECTION)
-					{
-						/*int size = 4 + (4 * Intersection::LINE_MAX_INTERSECTION_LINES);
-						intersections = std::vector<Intersection*>(static_cast<int>(std::floor(fdata.size() / (4 + (4 * Intersection::LINE_MAX_INTERSECTION_LINES)))));
-						for (int i = 0; (i + 1) * size < fdata.size(); i++)
-						{
-							std::vector<IntersectionLine*> lines(Intersection::LINE_MAX_INTERSECTION_LINES);
-							for (int l = 0; l <= Intersection::LINE_MAX_INTERSECTION_LINES; l++)
-							{
-								int arr = ((size * i) + 4);
-								int index = fdata[arr + (4 * l)];
-								int reserved = fdata[arr + (4 * l) + 1];
-								short angle = static_cast<short>(((fdata[arr + (4 * l) + 3] & 0xff) << 8) | (fdata[arr + (4 * l) + 2] & 0xff));
-								IntersectionLine *intLine = new IntersectionLine(index, reserved, angle);
-								lines[l] = intLine;
-
-								delete intLine;
-							}
-							intersections[i] = new Intersection(fdata[size * i] & 0xFF, fdata[(size * i) + 1] & 0xFF, fdata[(size * i) + 2] & 0xFF, fdata[(size * i) + 3] & 0xFF, lines);
-						}*/
-						intersections = (Intersection *)fdata;
-						numIntersections = fsize/sizeof(Intersection);
-						res |= LINE_INTERSECTION;
-					}
-					else if (ftype == LINE_BARCODE)
-					{
-						/*barcodes = std::vector<Barcode*>(static_cast<int>(std::floor(fdata.size() / 4)));
-						for (int i = 0; (i + 1) * 4 <= fdata.size(); i++)
-						{
-							barcodes[i] = new Barcode(fdata[(4 * i)] & 0xFF, fdata[(4 * i) + 1] & 0xFF, fdata[(4 * i) + 2] & 0xFF, fdata[(4 * i) + 3] & 0xFF);
-						}*/
-						barcodes = (Barcode *)fdata;
-            			numBarcodes = fsize/sizeof(Barcode);
-						res |= LINE_BARCODE;
-					}
-					else
-					{
-						break; // parse error
-					}
+					*/
+					res |= LINE_VECTOR;
 				}
-				//return new LineFeatures(vectors, intersections, barcodes);
+				else if (ftype == LINE_INTERSECTION)
+				{
+					/*int size = 4 + (4 * Intersection::LINE_MAX_INTERSECTION_LINES);
+					intersections = std::vector<Intersection*>(static_cast<int>(std::floor(fdata.size() / (4 + (4 * Intersection::LINE_MAX_INTERSECTION_LINES)))));
+					for (int i = 0; (i + 1) * size < fdata.size(); i++)
+					{
+						std::vector<IntersectionLine*> lines(Intersection::LINE_MAX_INTERSECTION_LINES);
+						for (int l = 0; l <= Intersection::LINE_MAX_INTERSECTION_LINES; l++)
+						{
+							int arr = ((size * i) + 4);
+							int index = fdata[arr + (4 * l)];
+							int reserved = fdata[arr + (4 * l) + 1];
+							short angle = static_cast<short>(((fdata[arr + (4 * l) + 3] & 0xff) << 8) | (fdata[arr + (4 * l) + 2] & 0xff));
+							IntersectionLine *intLine = new IntersectionLine(index, reserved, angle);
+							lines[l] = intLine;
+
+							delete intLine;
+						}
+						intersections[i] = new Intersection(fdata[size * i] & 0xFF, fdata[(size * i) + 1] & 0xFF, fdata[(size * i) + 2] & 0xFF, fdata[(size * i) + 3] & 0xFF, lines);
+					}*/
+					intersections = (Intersection *)fdata;
+					numIntersections = fsize/sizeof(Intersection);
+					res |= LINE_INTERSECTION;
+				}
+				else if (ftype == LINE_BARCODE)
+				{
+					/*barcodes = std::vector<Barcode*>(static_cast<int>(std::floor(fdata.size() / 4)));
+					for (int i = 0; (i + 1) * 4 <= fdata.size(); i++)
+					{
+						barcodes[i] = new Barcode(fdata[(4 * i)] & 0xFF, fdata[(4 * i) + 1] & 0xFF, fdata[(4 * i) + 2] & 0xFF, fdata[(4 * i) + 3] & 0xFF);
+					}*/
+					barcodes = (Barcode *)fdata;
+					numBarcodes = fsize/sizeof(Barcode);
+					res |= LINE_BARCODE;
+				}
+				else
+				{
+					break; // parse error
+				}
 			}
+			//return new LineFeatures(vectors, intersections, barcodes);
+		
+		} else {
+			break;
 		}
 	}
 	return new LineFeatures(vectors, intersections, barcodes);

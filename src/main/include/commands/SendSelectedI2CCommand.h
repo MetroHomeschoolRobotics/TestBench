@@ -13,7 +13,6 @@
 class SendSelectedI2CCommand : public frc::Command {
  private:
  std::unique_ptr<OI> _oi;
- std::unique_ptr<frc::Command> _selectedCommand;
  public:
   SendSelectedI2CCommand(OI *oi);
   void Initialize() override;

@@ -25,31 +25,32 @@ public:
 	static const std::uint8_t PIXYSTARTNOCHECK2 = static_cast<std::uint8_t>(0xc1);
 
 	static const std::uint8_t PIXY00 = static_cast<std::uint8_t>(0x00);
+	static const std::uint8_t PIXY01 = static_cast<std::uint8_t>(0x01);
 	static const std::uint8_t PIXY02 = static_cast<std::uint8_t>(0x02);
 
 	static const std::uint8_t PIXY_TYPE_REQUEST_VERSION = static_cast<std::uint8_t>(0x0e);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_VERSION = static_cast<std::uint8_t>(0x0f);
 
-	static const std::uint8_t PIXY_CCC_RESPONSE_BLOCKS = static_cast<std::uint8_t>(0x21);
 	static const std::uint8_t PIXY_CCC_REQUEST_BLOCKS = static_cast<std::uint8_t>(0x20);
+	static const std::uint8_t PIXY_CCC_RESPONSE_BLOCKS = static_cast<std::uint8_t>(0x21);
 
-	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LAMP = static_cast<std::uint8_t>(0x22);
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LAMP = static_cast<std::uint8_t>(0x16);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_LAMP = static_cast<std::uint8_t>(0x01);
 
-	static const std::uint8_t PIXY_TYPE_REQUEST_SET_BRIGHTNESS = static_cast<std::uint8_t>(0x16);
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_BRIGHTNESS = static_cast<std::uint8_t>(0x10);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_BRIGHTNESS = static_cast<std::uint8_t>(0x01);
 	
-	static const std::uint8_t PIXY_TYPE_REQUEST_SET_SERVOS = static_cast<std::uint8_t>(0x18);
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_SERVOS = static_cast<std::uint8_t>(0x12);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_SERVOS = static_cast<std::uint8_t>(0x01);
 	
-	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LED = static_cast<std::uint8_t>(0x20);
+	static const std::uint8_t PIXY_TYPE_REQUEST_SET_LED = static_cast<std::uint8_t>(0x14);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_SET_LED = static_cast<std::uint8_t>(0x01);
 
-	static const std::uint8_t PIXY_TYPE_REQUEST_GET_FPS = static_cast<std::uint8_t>(0x24);
+	static const std::uint8_t PIXY_TYPE_REQUEST_GET_FPS = static_cast<std::uint8_t>(0x18);
 	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_FPS = static_cast<std::uint8_t>(0x01);
 
-	static const std::uint8_t PIXY_TYPE_REQUEST_GET_RESOLUTION = static_cast<std::uint8_t>(12);
-	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_RESOLUTION = static_cast<std::uint8_t>(13);
+	static const std::uint8_t PIXY_TYPE_REQUEST_GET_RESOLUTION = static_cast<std::uint8_t>(0x0a);
+	static const std::uint8_t PIXY_TYPE_RESPONSE_GET_RESOLUTION = static_cast<std::uint8_t>(0x0b);
 
 	static const std::uint8_t LINE_REQUEST_GET_FEATURES = static_cast<std::uint8_t>(0x30);
 	static const std::uint8_t LINE_RESPONSE_GET_FEATURES = static_cast<std::uint8_t>(0x31);

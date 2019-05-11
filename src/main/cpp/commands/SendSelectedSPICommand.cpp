@@ -19,7 +19,6 @@ void SendSelectedSPICommand::Initialize() {}
 // Called repeatedly when this Command is scheduled to run
 void SendSelectedSPICommand::Execute() {
   Command* cmd = _oi.get()->getSPIChooser()->GetSelected();
-  _selectedCommand.reset(cmd);
   cmd->Run();
 }
 

@@ -20,7 +20,6 @@ void SendSelectedI2CCommand::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void SendSelectedI2CCommand::Execute() {
   Command* cmd = _oi.get()->getI2CChooser()->GetSelected();
-  _selectedCommand.reset(cmd);
   cmd->Run();
 }
 
