@@ -6,6 +6,8 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.Motor1SlowForward;
+import frc.robot.commands.Motor2Backwards;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TestBenchMotor1;
 import frc.robot.subsystems.TestBenchMotor2;
@@ -45,8 +47,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    m_driverController.a().whileTrue(new Motor1SlowForward(m_TestBenchMotor1));
+    m_driverController.x().whileTrue(new Motor2Backwards(m_TestBenchMotor2));
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
   }
 

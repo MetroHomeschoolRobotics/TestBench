@@ -5,31 +5,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.TestBenchMotor1;
+import frc.robot.subsystems.TestBenchMotor2;
 
-public class Motor1SlowForward extends Command {
-  /** Creates a new Motor1SlowForward. */
-  private TestBenchMotor1 m_TestBenchMotor1;
-  public Motor1SlowForward(TestBenchMotor1 m_TestBenchMotor1) {
-    addRequirements(m_TestBenchMotor1);
+public class Motor2Backwards extends Command {
+  /** Creates a new Motor2Backwards. */
+  TestBenchMotor2 m_TestBenchMotor2;
+  public Motor2Backwards(TestBenchMotor2 m_TestBenchMotor2) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_TestBenchMotor2);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_TestBenchMotor1.DriveForward(0.3);
+    m_TestBenchMotor2.DriveBackwards(0.5);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_TestBenchMotor1.DriveForward(0.3);
+    m_TestBenchMotor2.DriveBackwards(0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_TestBenchMotor1.DriveForward(0);
+    m_TestBenchMotor2.DriveBackwards(0);
   }
 
   // Returns true when the command should end.
