@@ -3,13 +3,12 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
+import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class TestBenchMotor2 extends SubsystemBase {
   /** Creates a new TestBenchMotor2. */
-  private Talon TestBenchMotor2Object = new Talon(0);
+  private TalonFX TestBenchMotor2Object = new TalonFX(1);
 
   public TestBenchMotor2() {
   }
