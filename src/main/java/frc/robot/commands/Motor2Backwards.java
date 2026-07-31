@@ -11,6 +11,7 @@ public class Motor2Backwards extends Command {
   /** Creates a new Motor2Backwards. */
   TestBenchMotor2 m_TestBenchMotor2;
   public Motor2Backwards(TestBenchMotor2 m_TestBenchMotor2) {
+    this.m_TestBenchMotor2=m_TestBenchMotor2;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_TestBenchMotor2);
   }

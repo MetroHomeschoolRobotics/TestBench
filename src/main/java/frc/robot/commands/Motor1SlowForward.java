@@ -11,6 +11,7 @@ public class Motor1SlowForward extends Command {
   /** Creates a new Motor1SlowForward. */
   private TestBenchMotor1 m_TestBenchMotor1;
   public Motor1SlowForward(TestBenchMotor1 m_TestBenchMotor1) {
+    this.m_TestBenchMotor1=m_TestBenchMotor1;
     addRequirements(m_TestBenchMotor1);
   }
 
