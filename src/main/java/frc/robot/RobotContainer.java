@@ -9,10 +9,13 @@ import frc.robot.commands.AlternateMotors;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Motor1SlowForward;
 import frc.robot.commands.Motor2Backwards;
+import frc.robot.commands.MovePIDWithJoystick;
+import frc.robot.commands.togglePIDFlag;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TestBenchMotor1;
 import frc.robot.subsystems.TestBenchMotor2;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -27,16 +30,18 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final TestBenchMotor1 m_TestBenchMotor1 = new TestBenchMotor1();
   private final TestBenchMotor2 m_TestBenchMotor2 = new TestBenchMotor2();
-
+ 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-
+   private final MovePIDWithJoystick movePIDWithJoystick = new MovePIDWithJoystick(m_TestBenchMotor1, m_driverController);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
   }
+  
+ 
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -48,10 +53,16 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    CommandScheduler.getInstance().setDefaultCommand(m_TestBenchMotor1,movePIDWithJoystick);
     m_driverController.a().whileTrue(new Motor1SlowForward(m_TestBenchMotor1));
     m_driverController.x().whileTrue(new Motor2Backwards(m_TestBenchMotor2));
     m_driverController.b().whileTrue(new AlternateMotors(m_TestBenchMotor1, m_TestBenchMotor2));
+
+    m_driverController.povUp().whileTrue(new togglePIDFlag(m_TestBenchMotor1));
+    
   }
+
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
