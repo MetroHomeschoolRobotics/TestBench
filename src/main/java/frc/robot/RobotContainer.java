@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AlternateMotors;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Motor1SlowForward;
 import frc.robot.commands.Motor2Backwards;
@@ -49,7 +50,7 @@ public class RobotContainer {
   private void configureBindings() {
     m_driverController.a().whileTrue(new Motor1SlowForward(m_TestBenchMotor1));
     m_driverController.x().whileTrue(new Motor2Backwards(m_TestBenchMotor2));
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    m_driverController.b().whileTrue(new AlternateMotors(m_TestBenchMotor1, m_TestBenchMotor2));
   }
 
   /**

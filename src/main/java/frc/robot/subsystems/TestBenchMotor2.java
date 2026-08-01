@@ -23,6 +23,6 @@ public class TestBenchMotor2 extends SubsystemBase {
   }
 
   public void DriveBackwards(double Output) {
-    TestBenchMotor2Object.setVoltage(Output*12);
+    TestBenchMotor2Object.setVoltage(Output*-12);
   }
 }
