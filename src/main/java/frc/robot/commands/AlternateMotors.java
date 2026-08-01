@@ -26,6 +26,7 @@ public class AlternateMotors extends Command {
             m_TestBenchMotor2.DriveForward(0.5);
             m_TestBenchMotor1.DriveForward(0);
         }
+            timer++;
     }
     public void end(boolean interrupted){
         m_TestBenchMotor1.DriveForward(0);

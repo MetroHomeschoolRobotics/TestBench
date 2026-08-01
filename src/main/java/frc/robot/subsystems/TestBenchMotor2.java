@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class TestBenchMotor2 extends SubsystemBase {
   /** Creates a new TestBenchMotor2. */
   private TalonFX TestBenchMotor2Object = new TalonFX(1);
-
+  
   public TestBenchMotor2() {
   }
 
@@ -20,6 +20,10 @@ public class TestBenchMotor2 extends SubsystemBase {
 
   public void DriveForward(double Output) {
     TestBenchMotor2Object.setVoltage(Output*12);
+  }
+
+  public double getEncoder(){
+    return TestBenchMotor2Object.getPosition().getValueAsDouble();
   }
 
   public void DriveBackwards(double Output) {
